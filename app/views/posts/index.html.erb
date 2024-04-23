@@ -5,7 +5,8 @@
 <ul>
   <% @posts.each do |post| %>
     <li>
-      <h4><%= post.title%></h4>
+      <!-- <a href="<%= post_path(post)%>"><%=post.title%></a> -->
+      <h4><%= link_to post.title, post %></h4>
     </li>
   <%end%>
 </ul>
