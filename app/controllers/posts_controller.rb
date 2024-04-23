@@ -19,6 +19,24 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit
+    @post = Post.find(params[:id])
+  end
+  def update
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      redirect_to @post
+    else
+      render :edit, status: :unprocessable_entity, notice:"failed to update post"
+    end
+  end
+
+  def destroy
+    @post = post.find(params[:id])
+    @post.destroy
+    redirect_to root_path, status: :see_other, notice:"post deleted"
+  end
+
   private
 
   def post_params

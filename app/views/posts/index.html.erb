@@ -7,6 +7,10 @@
     <li>
       <!-- <a href="<%= post_path(post)%>"><%=post.title%></a> -->
       <h4><%= link_to post.title, post %></h4>
+      <%# # if user_logged_in = post.user_id  %>
+      <%# link_to "Edit post", edit_post_path(post) %>
+      <% # button_to "Delete post", post_path(@ost), data{turbo.method:delete, turbo.confirm:"Are you sure?"} %>
+      <% # end %>
     </li>
   <%end%>
 </ul>
