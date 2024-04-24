@@ -1,5 +1,12 @@
 <h1>micro_Twitter</h1>
-<p>Welcome to the rails micro twitter app</p>
+<p>Built to test associations and using a gem</p>
+<%if user_signed_in? %>
+  <div>Welcome <%=current_user.full_name %></div>
+  <br>
+  <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+<%else%>
+  <%= button_to "Sign in", new_user_session_path %>
+<%end%>
 <br>
 <br>
 <ul>
