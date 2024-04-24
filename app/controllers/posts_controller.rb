@@ -11,7 +11,8 @@ class PostsController < ApplicationController
     @post = Post.new
   end
   def create
-    @post = Post.new(post_params)
+    @user = User.find(current_user[:id])
+    @post = @user.posts.create(post_params)
     if @post.save
       redirect_to root_path, notice: "Posted!"
     else
@@ -23,7 +24,8 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
   def update
-    @post = Post.find(params[:id])
+    @user = User.find(current_user[:id])
+    @post = @user.posts.find(params[:id])
     if @post.update(post_params)
       redirect_to @post
     else
@@ -32,7 +34,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = post.find(params[:id])
+    @user = User.find(current_user[:id])
+    @post = @user.posts.find(params[:id])
     @post.destroy
     redirect_to root_path, status: :see_other, notice:"post deleted"
   end
@@ -40,6 +43,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body)
+    params.require(:post).permit(:title, :body, :user_id)
   end
 end

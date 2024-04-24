@@ -10,17 +10,15 @@
 <br>
 <br>
 <ul>
-  <% @posts.each do |post| %>
+  <% @posts.each do |post|%>
     <li>
-      <!-- <a href="<%= post_path(post)%>"><%=post.title%></a> -->
       <h4><%= link_to post.title, post %></h4>
-      <%# # if user_logged_in = post.user_id  %>
-      <%# link_to "Edit post", edit_post_path(post) %>
-      <% # button_to "Delete post", post_path(@ost), data{turbo.method:delete, turbo.confirm:"Are you sure?"} %>
-      <% # end %>
+      <% if user_signed_in? && current_user.id == post.user_id %>
+        <%= link_to "edit post", edit_post_path(post)%>
+        <%= link_to "delete post", post_path(post), data:{turbo_method: :delete, turbo_confirm:"Are you sure?"} %>
+      <%end%>
     </li>
   <%end%>
 </ul>
 <br>
-<br>
-<h4><%= link_to "Create a new form", new_post_path %></h4>
+<h4><%= link_to "Create a new post!", new_post_path if user_signed_in? %></h4>
