@@ -1,0 +1,15 @@
+<%=form_with model: post_form do |f|%>
+  <%= f.label :title %>
+  <%= f.text_field :title, placeholder:"Someting interesting"%><br>
+  <% post_form.errors.full_messages_for(:title).each do |msg|%>
+    <%= msg%>
+  <%end%>
+  <%= f.label :body%>
+  <%= f.text_area :body, placeholder:"Your message goes here"%><br>
+  <% post_form.errors.full_messages_for(:body).each do |msg|%>
+    <p><%= msg %></p>
+  <%end%>
+  <br>
+  <%= f.submit%>
+<%end%>
+<%=link_to "Cancel", root_path%>

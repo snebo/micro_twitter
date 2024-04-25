@@ -1,0 +1,9 @@
+<%comments.each do |comment|%>
+  <p>
+    <strong><%= (User.find_by_id(comment.user_id)).full_name %></strong>
+  </p>
+  <p><strong>Says: </strong><%= comment.body%></p>
+  <%if current_user.id == comment.user_id%>
+    <p><%= link_to "Delete Comment", [comment.post, comment], data: {turbo_method: :delete, turbo_confirm:"delete comment?"} %></p>
+  <%end%>
+<%end%>

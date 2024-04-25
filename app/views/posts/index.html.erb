@@ -1,0 +1,24 @@
+<h1>micro_Twitter</h1>
+<p>Built to test associations and using a gem</p>
+<%if user_signed_in? %>
+  <div>Welcome <%=current_user.full_name %></div>
+  <br>
+  <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+<%else%>
+  <%= button_to "Sign in", new_user_session_path %>
+<%end%>
+<br>
+<br>
+<ul>
+  <% @posts.each do |post|%>
+    <li>
+      <h4><%= link_to post.title, post %></h4>
+      <% if user_signed_in? && current_user.id == post.user_id %>
+        <%= link_to "edit post", edit_post_path(post)%>
+        <%= link_to "delete post", post_path(post), data:{turbo_method: :delete, turbo_confirm:"Are you sure?"} %>
+      <%end%>
+    </li>
+  <%end%>
+</ul>
+<br>
+<h4><%= link_to "Create a new post!", new_post_path if user_signed_in? %></h4>
